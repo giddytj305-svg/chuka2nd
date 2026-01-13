@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Details - Chuka 2nd Hand</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-recycle text-2xl"></i>
+                    <h1 class="text-2xl font-bold">Chuka 2nd Hand</h1>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="index.html" class="hover:text-gray-200 font-medium">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <button id="loginBtn" class="bg-white text-blue-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Login
+                    </button>
+                    <div class="hidden items-center space-x-4" id="userMenu">
+                        <a href="my-listings.html" class="hover:text-gray-200 font-medium">
+                            <i class="fas fa-list mr-2"></i>My Listings
+                        </a>
+                        <button id="logoutBtn" class="bg-red-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-600 transition">
+                            <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Item Details -->
+    <div class="container mx-auto px-4 py-12 max-w-6xl">
+        <!-- Back Button -->
+        <a href="index.html" class="inline-flex items-center text-blue-600 mb-6 hover:text-blue-800">
+            <i class="fas fa-arrow-left mr-2"></i> Back to Browse
+        </a>
+        
+        <!-- Loading -->
+        <div id="loading" class="text-center py-12">
+            <i class="fas fa-spinner fa-spin text-4xl text-blue-500"></i>
+            <p class="mt-4 text-gray-600">Loading item details...</p>
+        </div>
+        
+        <!-- Item Content -->
+        <div id="itemContent" class="hidden">
+            <div class="bg-white rounded-2xl card-shadow overflow-hidden">
+                <div class="md:flex">
+                    <!-- Image Section -->
+                    <div class="md:w-1/2 p-8">
+                        <div class="relative overflow-hidden rounded-xl">
+                            <img id="itemImage" 
+                                 src="" 
+                                 alt="Item image"
+                                 class="w-full h-auto object-cover rounded-xl">
+                            <div class="absolute top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-full font-semibold">
+                                <i class="fas fa-clock mr-2"></i><span id="itemTime"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Details Section -->
+                    <div class="md:w-1/2 p-8">
+                        <div class="mb-8">
+                            <h1 id="itemTitle" class="text-3xl font-bold text-gray-800 mb-4"></h1>
+                            <div class="flex items-center text-gray-600 mb-6">
+                                <i class="fas fa-user-circle mr-2"></i>
+                                <span id="sellerInfo">Posted by Seller</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Description -->
+                        <div class="mb-8">
+                            <h2 class="text-xl font-semibold text-gray-800 mb-4">Description</h2>
+                            <p id="itemDescription" class="text-gray-600 whitespace-pre-line"></p>
+                        </div>
+                        
+                        <!-- WhatsApp Contact -->
+                        <div class="bg-green-50 border border-green-200 rounded-xl p-6 mb-8">
+                            <div class="flex items-center mb-4">
+                                <div class="bg-green-100 p-3 rounded-lg mr-4">
+                                    <i class="fab fa-whatsapp text-green-600 text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-800">Contact via WhatsApp</h3>
+                                    <p class="text-gray-600">Click the button below to message the seller</p>
+                                </div>
+                            </div>
+                            <a id="whatsappLink" 
+                               target="_blank"
+                               class="inline-flex items-center justify-center w-full bg-green-500 text-white py-4 rounded-lg font-semibold hover:bg-green-600 transition">
+                                <i class="fab fa-whatsapp text-xl mr-3"></i>
+                                <span>Message on WhatsApp</span>
+                            </a>
+                            <p class="text-gray-500 text-sm mt-3 text-center">
+                                The seller will respond directly on WhatsApp
+                            </p>
+                        </div>
+                        
+                        <!-- Safety Tips -->
+                        <div class="border border-gray-200 rounded-xl p-6">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Safety Tips</h3>
+                            <ul class="space-y-3 text-gray-600">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span>Meet in a public place</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span>Inspect the item before buying</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span>Don't share personal information</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                    <span>Trust your instincts</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Not Found -->
+        <div id="notFound" class="hidden text-center py-12">
+            <div class="max-w-md mx-auto">
+                <div class="bg-gray-100 w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-search text-6xl text-gray-400"></i>
+                </div>
+                <h3 class="text-2xl font-semibold text-gray-700 mb-2">Item Not Found</h3>
+                <p class="text-gray-600 mb-8">The item you're looking for doesn't exist or has been removed.</p>
+                <a href="index.html" 
+                   class="inline-flex items-center bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-600 transition">
+                    <i class="fas fa-home mr-3"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Supabase Configuration
+        const SUPABASE_URL = 'https://wisietezefluwlvsfqkz.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indpc2lldGV6ZWZsdXdsdnNmcWt6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgzMzExNzEsImV4cCI6MjA4MzkwNzE3MX0._ICLh5WnxrooU2sTTscgOeGYeGYuEZINmrb8TsESasc';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        // Check auth state
+        let currentUser = null;
+        
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            if (session) {
+                currentUser = session.user;
+                updateAuthUI();
+            }
+        });
+        
+        supabase.auth.onAuthStateChange((event, session) => {
+            currentUser = session?.user || null;
+            updateAuthUI();
+        });
+        
+        function updateAuthUI() {
+            const loginBtn = document.getElementById('loginBtn');
+            const userMenu = document.getElementById('userMenu');
+            
+            if (currentUser) {
+                loginBtn.classList.add('hidden');
+                userMenu.classList.remove('hidden');
+            } else {
+                loginBtn.classList.remove('hidden');
+                userMenu.classList.add('hidden');
+            }
+        }
+        
+        // Event Listeners
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
+        
+        document.getElementById('logoutBtn')?.addEventListener('click', async () => {
+            await supabase.auth.signOut();
+            window.location.href = 'index.html';
+        });
+        
+        // Load item details
+        document.addEventListener('DOMContentLoaded', loadItemDetails);
+        
+        async function loadItemDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const itemId = urlParams.get('id');
+            
+            if (!itemId) {
+                showNotFound();
+                return;
+            }
+            
+            try {
+                const { data: item, error } = await supabase
+                    .from('items')
+                    .select('*')
+                    .eq('id', itemId)
+                    .single();
+                
+                if (error || !item) {
+                    showNotFound();
+                    return;
+                }
+                
+                // Hide loading, show content
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('itemContent').classList.remove('hidden');
+                
+                // Populate data
+                document.getElementById('itemTitle').textContent = item.title;
+                document.getElementById('itemDescription').textContent = item.description || 'No description provided';
+                document.getElementById('itemImage').src = item.image_url || 'https://via.placeholder.com/600x400?text=No+Image';
+                
+                // Format time
+                const timeAgo = getTimeAgo(item.created_at);
+                document.getElementById('itemTime').textContent = timeAgo;
+                
+                // Setup WhatsApp link
+                const whatsappNumber = item.whatsapp.replace(/\D/g, '');
+                const whatsappMessage = `Hello, I'm interested in your item "${item.title}" on Chuka 2nd Hand.`;
+                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+                document.getElementById('whatsappLink').href = whatsappUrl;
+                
+            } catch (error) {
+                console.error('Error loading item:', error);
+                showNotFound();
+            }
+        }
+        
+        function getTimeAgo(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const seconds = Math.floor((now - date) / 1000);
+            
+            if (seconds < 60) return 'Just now';
+            
+            const minutes = Math.floor(seconds / 60);
+            if (minutes < 60) return `${minutes}m ago`;
+            
+            const hours = Math.floor(minutes / 60);
+            if (hours < 24) return `${hours}h ago`;
+            
+            const days = Math.floor(hours / 24);
+            if (days < 30) return `${days}d ago`;
+            
+            const months = Math.floor(days / 30);
+            if (months < 12) return `${months}mo ago`;
+            
+            return `${Math.floor(months / 12)}y ago`;
+        }
+        
+        function showNotFound() {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('notFound').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
