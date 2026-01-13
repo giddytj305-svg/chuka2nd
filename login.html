@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Chuka 2nd Hand</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="login-container w-full max-w-md p-8">
+        <!-- Back Button -->
+        <a href="index.html" class="inline-flex items-center text-white mb-8 hover:text-gray-200">
+            <i class="fas fa-arrow-left mr-2"></i> Back to Home
+        </a>
+        
+        <!-- Logo -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full mb-4">
+                <i class="fas fa-recycle text-3xl text-blue-600"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-white">Chuka 2nd Hand</h1>
+            <p class="text-gray-200 mt-2">Buy and sell pre-loved items</p>
+        </div>
+        
+        <!-- Login/Signup Tabs -->
+        <div class="flex mb-6">
+            <button id="loginTab" class="flex-1 py-3 text-white font-semibold border-b-2 border-blue-400">
+                <i class="fas fa-sign-in-alt mr-2"></i>Login
+            </button>
+            <button id="signupTab" class="flex-1 py-3 text-gray-300 font-semibold border-b-2 border-transparent">
+                <i class="fas fa-user-plus mr-2"></i>Sign Up
+            </button>
+        </div>
+        
+        <!-- Login Form -->
+        <form id="loginForm" class="space-y-6">
+            <div>
+                <label class="block text-white mb-2 font-medium">Email</label>
+                <div class="relative">
+                    <i class="fas fa-envelope absolute left-3 top-3 text-gray-400"></i>
+                    <input type="email" 
+                           id="loginEmail"
+                           required
+                           class="w-full pl-10 pr-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent">
+                </div>
+            </div>
+            
+            <div>
+                <label class="block text-white mb-2 font-medium">Password</label>
+                <div class="relative">
+                    <i class="fas fa-lock absolute left-3 top-3 text-gray-400"></i>
+                    <input type="password" 
+                           id="loginPassword"
+                           required
+                           minlength="6"
+                           class="w-full pl-10 pr-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent">
+                    <button type="button" 
+                            class="absolute right-3 top-3 text-gray-400 hover:text-white"
+                            onclick="togglePassword('loginPassword', this)">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <button type="submit" 
+                    id="loginSubmit"
+                    class="w-full bg-white text-blue-600 py-3 rounded-lg font-semibold hover:bg-gray-100 transition flex items-center justify-center">
+                <i class="fas fa-sign-in-alt mr-2"></i>
+                <span>Login</span>
+                <span id="loginSpinner" class="hidden ml-2">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </span>
+            </button>
+            
+            <div class="text-center">
+                <a href="#" class="text-gray-300 hover:text-white text-sm">Forgot password?</a>
+            </div>
+        </form>
+        
+        <!-- Signup Form -->
+        <form id="signupForm" class="space-y-6 hidden">
+            <div>
+                <label class="block text-white mb-2 font-medium">Email</label>
+                <div class="relative">
+                    <i class="fas fa-envelope absolute left-3 top-3 text-gray-400"></i>
+                    <input type="email" 
+                           id="signupEmail"
+                           required
+                           class="w-full pl-10 pr-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent">
+                </div>
+            </div>
+            
+            <div>
+                <label class="block text-white mb-2 font-medium">Password</label>
+                <div class="relative">
+                    <i class="fas fa-lock absolute left-3 top-3 text-gray-400"></i>
+                    <input type="password" 
+                           id="signupPassword"
+                           required
+                           minlength="6"
+                           class="w-full pl-10 pr-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent">
+                    <button type="button" 
+                            class="absolute right-3 top-3 text-gray-400 hover:text-white"
+                            onclick="togglePassword('signupPassword', this)">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <p class="text-gray-300 text-sm mt-1">Minimum 6 characters</p>
+            </div>
+            
+            <div>
+                <label class="block text-white mb-2 font-medium">Confirm Password</label>
+                <div class="relative">
+                    <i class="fas fa-lock absolute left-3 top-3 text-gray-400"></i>
+                    <input type="password" 
+                           id="signupConfirmPassword"
+                           required
+                           class="w-full pl-10 pr-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent">
+                </div>
+            </div>
+            
+            <div class="flex items-start">
+                <input type="checkbox" 
+                       id="terms"
+                       required
+                       class="mt-1 mr-3">
+                <label for="terms" class="text-gray-300 text-sm">
+                    I agree to the <a href="#" class="text-white hover:underline">Terms of Service</a> and <a href="#" class="text-white hover:underline">Privacy Policy</a>
+                </label>
+            </div>
+            
+            <button type="submit" 
+                    id="signupSubmit"
+                    class="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition flex items-center justify-center">
+                <i class="fas fa-user-plus mr-2"></i>
+                <span>Create Account</span>
+                <span id="signupSpinner" class="hidden ml-2">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </span>
+            </button>
+        </form>
+        
+        <!-- Error Message -->
+        <div id="authError" class="mt-6 p-4 bg-red-500 bg-opacity-20 border border-red-500 rounded-lg hidden">
+            <p id="errorMessage" class="text-white"></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Supabase Configuration (same as main page)
+        const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
+        const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        // Tab Switching
+        const loginTab = document.getElementById('loginTab');
+        const signupTab = document.getElementById('signupTab');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        
+        loginTab.addEventListener('click', () => {
+            loginTab.classList.add('border-blue-400', 'text-white');
+            loginTab.classList.remove('border-transparent', 'text-gray-300');
+            signupTab.classList.add('border-transparent', 'text-gray-300');
+            signupTab.classList.remove('border-blue-400', 'text-white');
+            loginForm.classList.remove('hidden');
+            signupForm.classList.add('hidden');
+        });
+        
+        signupTab.addEventListener('click', () => {
+            signupTab.classList.add('border-blue-400', 'text-white');
+            signupTab.classList.remove('border-transparent', 'text-gray-300');
+            loginTab.classList.add('border-transparent', 'text-gray-300');
+            loginTab.classList.remove('border-blue-400', 'text-white');
+            signupForm.classList.remove('hidden');
+            loginForm.classList.add('hidden');
+        });
+        
+        // Toggle Password Visibility
+        function togglePassword(inputId, button) {
+            const input = document.getElementById(inputId);
+            const icon = button.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fas fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'fas fa-eye';
+            }
+        }
+        
+        // Login Form Submission
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const submitBtn = document.getElementById('loginSubmit');
+            const spinner = document.getElementById('loginSpinner');
+            const errorDiv = document.getElementById('authError');
+            
+            submitBtn.disabled = true;
+            spinner.classList.remove('hidden');
+            errorDiv.classList.add('hidden');
+            
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email,
+                    password
+                });
+                
+                if (error) throw error;
+                
+                // Redirect to home page
+                window.location.href = 'index.html';
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                document.getElementById('errorMessage').textContent = error.message;
+                errorDiv.classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                spinner.classList.add('hidden');
+            }
+        });
+        
+        // Signup Form Submission
+        signupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+            const submitBtn = document.getElementById('signupSubmit');
+            const spinner = document.getElementById('signupSpinner');
+            const errorDiv = document.getElementById('authError');
+            
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                document.getElementById('errorMessage').textContent = 'Passwords do not match';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            spinner.classList.remove('hidden');
+            errorDiv.classList.add('hidden');
+            
+            try {
+                const { data, error } = await supabase.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                        emailRedirectTo: window.location.origin
+                    }
+                });
+                
+                if (error) throw error;
+                
+                // Show success message
+                document.getElementById('errorMessage').textContent = 'Account created successfully! Please check your email to verify your account.';
+                document.getElementById('authError').className = 'mt-6 p-4 bg-green-500 bg-opacity-20 border border-green-500 rounded-lg';
+                errorDiv.classList.remove('hidden');
+                
+                // Clear form
+                signupForm.reset();
+                
+                // Switch to login tab after 3 seconds
+                setTimeout(() => {
+                    loginTab.click();
+                    errorDiv.classList.add('hidden');
+                }, 5000);
+                
+            } catch (error) {
+                console.error('Signup error:', error);
+                document.getElementById('errorMessage').textContent = error.message;
+                document.getElementById('authError').className = 'mt-6 p-4 bg-red-500 bg-opacity-20 border border-red-500 rounded-lg';
+                errorDiv.classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                spinner.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
